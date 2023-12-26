@@ -1,22 +1,42 @@
 pico-8 cartridge // http://www.pico-8.com
 version 41
 __lua__
+
+game_state = {
+    playing = 0,
+    missed = 1,
+    hit = 2
+}
+
 function _init()
-	x = 64 --coords of top left of rect
-	y = 64
+    current_state = game_state.playing
+	diver_x = flr(rnd()*128)
+	diver_y = 0
+    target = flr(rnd()*120)
 end
 
 function _update()
-	if btn(0) then x -= 1 end
-	if btn(1) then x += 1 end
-	if btn(2) then y -= 1 end
-	if btn(3) then y += 1 end
+    diver_y += 1
+	if btn(0) then diver_x -= 1 end
+	if btn(1) then diver_x += 1 end
+    if diver_y >= 128 then
+        if diver_x < target or diver_x > target + 8 then
+            current_state = game_state.missed
+        else
+            current_state = game_state.hit
+        end
+    end
 end
 
 function _draw()
 	cls()
-	--rectfill(x, y, x+1, y+1, 8)
-	pset(x, y, 8)
+	pset(diver_x, diver_y, 8)
+    rect(target, 127, target + 8, 127, 8)
+    if current_state == game_state.missed then
+        print("missed", 64, 64, 8)
+    elseif current_state == game_state.hit then
+        print("hit", 64, 64, 8)
+    end
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
