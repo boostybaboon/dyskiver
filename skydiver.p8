@@ -97,7 +97,7 @@ function _draw()
         print_centered("n: new game", 50, 7)
         print_centered("move left and right", 70, 7)
         print_centered("to hit the target!", 80, 7)
-        print_centered("Avoid the crows!", 100, 7)
+        print_centered("avoid the crows!", 100, 7)
         return
     else
         rect(target, 127, target + 8, 127, 7)
