@@ -40,6 +40,7 @@ function reset()
     diver_x = flr(rnd()*128)
     diver_y = 0
     target = flr(rnd()*120)
+    target_direction = rnd() > 0.5 and 1 or -1
     clear_table(crows)
     for i = 1, 50 do
         add(crows, 
@@ -75,6 +76,11 @@ function _update()
             current_state = game_state.landed
         end
         diver_y = 127
+    end
+
+    target += target_direction/1.1
+    if target < 0 or target > 120 then
+        target_direction *= -1
     end
 
     for crow in all(crows) do
