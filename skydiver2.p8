@@ -242,6 +242,7 @@ function _draw()
         print_centered("move left and right", 70, 7)
         print_centered("to hit the target!", 80, 7)
         print_centered("avoid the crows!", 100, 7)
+        print_centered("up slows and down hastens dive!", 120, 7)
         return
     else
         for _, crow in ipairs(crows) do
